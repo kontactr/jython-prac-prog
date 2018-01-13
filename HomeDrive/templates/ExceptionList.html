@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exception List</title>
+</head>
+<body>
+
+<h1>This List Has Some Directory With Files OR Files Are In Use</h1>
+
+    {%- for item in file_list -%}
+       <ol>
+           <li>{{ item }}</li>
+       </ol>
+
+    {%- endfor -%}
+
+<h2><a href="{{url_for('login')}}">Go To Dashboard</a></h2>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}'s chatbox</title>
+</head>
+<body>
+<form>
+    <textarea rows="3" cols="50" name="text_area"></textarea>
+    <input type="submit" value="Send Message" name="Send Message" formmethod="post" formaction="{{url_for('messages',title=title )}}" />
+        &nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Refresh" name="Refresh" formmethod="get" formaction="{{url_for('messages',title=title )}}"/>
+        </form>
+
+    <table>
+        <tr>
+            <th>Sender</th>
+            <th>Message</th>
+            <th>Time</th>
+        </tr>
+    {%- for item in msg -%}
+        <tr>
+        <td>{{ item[1] }}</td>
+        <td>{{ item[0] }}</td>
+        <td>{{ item[2] }}</td>
+            </tr>
+    {%- endfor -%}
+    </table>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DashBoard</title>
+</head>
+<body>
+
+<h1>Options</h1>
+
+
+
+<form>
+
+    <input type="submit" value="View Data" formaction="{{ url_for('view_data', path=path) }}" formmethod="GET" /><br /><br /><br/>
+    <input type="submit" value="Config" formaction="{{url_for('config_data')}}" formmethod="get" /><br/><br/><br/>
+     <input type="submit" value="LogOut" formaction="{{url_for('logout')}}" formmethod="post" /><br/>
+
+</form>
+
+</body>
+</html>

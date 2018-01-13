@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}'s Dashboard</title>
+</head>
+<body>
+    <form method="post">
+    <h1>Welcome {{name}} </h1><br />
+
+    <h2><input type="submit" value="show files" formaction="{{url_for('show_files', user_pa='\\')}}" formmethod="get"></input></h2><br />
+    <h2><input type="submit" value="show storage" formaction="{{url_for('show_storage', path='Data\\'+name)}}" formmethod="get"></input></h2><br />
+    <h2><input type="submit" value="Google Drive" formaction="{{url_for('.goog_drive_auth', name=name)}}" formmethod="get"></input> </h2><br />
+        <input type="submit" value="profile" formaction="{{url_for('profile')}}" formmethod="get"></input></h2><br />
+        <h2><input type="submit" value="logout" formaction="{{url_for('logout')}}" ></input></h2>
+
+        </form>
+</body>
+</html>

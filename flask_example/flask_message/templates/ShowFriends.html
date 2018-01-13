@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Friends:-</title>
+    <style type="text/css">
+        tr{
+        display:block;
+        border: 1px solid black;
+        border-left: 5px solid green;
+        hight: 500px;
+        width: 95%;
+        float: left;
+
+        }
+    </style>
+</head>
+
+<body>
+<table>
+    {% if storage_di|length != 0 %}
+    {%- for item in storage_di -%}
+    <tr>
+     <div>
+         <td>
+             <h3>{{ item }}</h3></td>
+         <td>
+         <form method="get" action="{{url_for('ChatFriend')}}">
+         <input type="submit" value="chat with {{item}}" name="button"/>
+         </form>
+         </td>
+     </div>
+        </tr>
+    {%- endfor -%}
+    {% endif %}
+</table>
+</body>
+</html>

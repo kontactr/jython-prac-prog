@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <form method="POST">
+        <div>
+            <label id="Username: ">Username</label>
+            <input type="text" name="username"/><br>
+            <label id="Password: ">Password</label>
+            <input type="password" name="password"><br />
+            <input type="submit" value="submit" />
+            <a href='{{url_for("register")}}'> Not User?</a>
+        </div>
+    </form>
+</body>
+</html>

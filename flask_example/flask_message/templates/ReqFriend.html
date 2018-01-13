@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReqFriend</title>
+</head>
+<body>
+ <h2>{{ title }}</h2>
+    {% if storage_di|length != 0 %}
+ <form method="post">
+     <input type="submit" value="Go to Process" ><br /><br />
+    <table border="1" cellpadding="5" >
+    <tr>
+    <th>Request</th>
+    <th>Accept</th>
+    <th>Reject</th>
+  </tr>
+    {%- for item in storage_di -%}
+     <tr>
+         <td>{{ item }}</td>
+         <td><input type="radio" value="Acc" name="rad_li_{{item}}" /></td>
+         <td><input type="radio" value="Rej" name="rad_li_{{item}}" /></td>
+      </tr>
+    {%- endfor -%}
+    </table>
+</form>
+{% endif %}
+</body>
+</html>

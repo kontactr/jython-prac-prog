@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drive Show Storage</title>
+</head>
+<body>
+
+<form method="post">
+ <table border="1">
+<tr>
+    <th>FileName:
+    </th>
+    <th>
+        Select To Download:
+    </th>
+</tr>
+{%- for item in list_item -%}
+        <tr>
+         {% if '.' in list_item[item] %}
+         <td>{{ list_item[item] }}</td><td style="text-align:center"><input type="checkbox" name="sh_fi" value="{{item}} {{list_item[item]}}" /></td>
+         {% else %}
+         <td ><a href="{{ url_for('download_drive_files' , name='Google', path=item) }}">{{ list_item[item] }}</a></td>
+         <td style="background:red;color:white;text-align:center">Directory</td>
+         {% endif %}
+      </tr>
+    {%- endfor -%}
+     </table>
+     <!--div id="piechart_.3d" style="width: 900px; height: 500px;"></div-->
+  <br /><br />
+
+    <input type="submit" formmethod="post" formaction="{{ url_for('download_drive_files' , name='Google', path=path) }}"
+    value="Go To Download" />
+
+
+    <h2><a href="{{url_for('login')}}">Go To Dashboard</a></h2>
+</form>
+
+
+</body>
+</html>

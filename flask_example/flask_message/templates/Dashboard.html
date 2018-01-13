@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}'s Dashboard</title>
+</head>
+<body>
+    <form method="post">
+    <h1>Welcome {{name}} </h1><br />
+        <h2><input type="submit" value="find friends" formaction="{{url_for('find_Friend',title='Add Friends')}}" formmethod="get" ></input></h2>
+        <h2><input type="submit" value="Req friend" formaction="{{url_for('find_Friend',title='Req Friends')}}" formmethod="get" ></input></h2>
+        <h2><input type="submit" value="show friend" formaction="{{url_for('find_Friend',title='show Friends')}}" formmethod="get" ></input></h2>
+        <h2><input type="submit" value="logout" formaction="{{url_for('logout')}}" ></input></h2>
+        </form>
+</body>
+</html>

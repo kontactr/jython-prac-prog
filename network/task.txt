@@ -1,0 +1,4 @@
+python sample.py
+python sample.py
+cmd.exe /c dir
+wmic product get name

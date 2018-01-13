@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+</head>
+<body>
+<form method="post">
+ <table border="1">
+<tr>
+    <th>FileName:
+    </th>
+    <th>
+        Size:
+    </th>
+    <th>
+        Upload To {{name}} Drive
+    </th>
+</tr>
+{%- for item in list_item -%}
+        <tr>
+         {% if '.' in item %}
+         <td>{{ item }}</td>
+            <td>{{ list_item[item] }}</td>
+            <td style="text-align:center"><input type="checkbox" name="sh_fi" value="{{item}}" /></td>
+         {% else %}
+         <td ><a href="{{ url_for('upload_drive_files' , name=name, path=path+'\\'+item) }}">{{ item }}</a></td>
+         <td style="background:red;color:white;text-align:center">Directory</td>
+         {% endif %}
+      </tr>
+    {%- endfor -%}
+     </table>
+  <br /><br />
+    <input type="submit" value="Go To Procees"  formaction="{{url_for('upload_drive_files',name=name, path=path)}}" formmethod="POST"/><br /><br />
+</form>
+</body>
+</html>

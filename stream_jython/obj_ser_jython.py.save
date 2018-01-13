@@ -1,0 +1,10 @@
+from java.io import Serializable as S
+
+class Employee(S):
+	name , age , add = None,None,None
+	def __init__(self,name,age,add):
+		self.name = name
+		self.age = age
+		self.add = add
+	def display(self):
+		print ("name: "+str(name),"

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddFriend</title>
+</head>
+<body>
+<form method="post">
+    <input type="text" name="search_item" size="25" value="{{val}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="Search"><br /><br />
+    <h2>{{ title }}</h2>
+    <table border="1" cellpadding="5" >
+
+    {%- for item in storage_di -%}
+     <tr>
+         <td>{{ item }}</td>
+         <td><input type="checkbox" value="{{item}}" name="ad_fr_list"></input></td>
+      </tr>
+    {%- endfor -%}
+    </table>
+    {% if storage_di|length != 0 %}
+     <input type="submit" value="Submit" formmethod="post"><br /><br />
+    {% endif %}
+</form>
+</body>
+</html>

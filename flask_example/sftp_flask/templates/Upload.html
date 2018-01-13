@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File</title>
+</head>
+<body>
+    <div>
+    <h2>Upload Your File {{name}}</h2>
+        <form method="POST" enctype=multipart/form-data onsubmit="return showFileSize();">
+            <label id="File: " ></label>&nbsp;&nbsp;&nbsp;
+            <input type="file" name="file" id="file" multiple><br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="submit"><br /><br />
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{url_for('login')}}">Go To Dashboard</a></h2>
+        </form>
+
+    </div>
+<script type='text/javascript'>
+function showFileSize() {
+    var input, file;
+    var jinja_size = "{{ size }}";
+    jinja_size = parseInt(jinja_size);
+    // (Can't use `typeof FileReader === "function"` because apparently
+    // it comes back as "object" on some browsers. So just see if it's there
+    // at all.)
+    if (!window.FileReader) {
+        alert("The file API isn't supported on this browser yet.");
+        alert("service must be provided your files are validate at server side :- work remaining currently return is false after complete work it must be true");
+        return false;
+    }
+
+    input = document.getElementById('file');
+	var text1 = "";
+    
+    //text1 += input.files[x].name;
+	//	}
+	//alert(text1);
+    if (!input) {
+        alert("Um, couldn't find the fileinput element.");
+        return false;
+    }
+    else if (!input.files) {
+        alert("This browser doesn't seem to support the `files` property of file inputs.");
+        return false;
+    }
+    else if (!input.files[0]) {
+        alert("Please select a file before clicking 'Load'");
+        return false;
+    }
+    else {
+		for (x in input.files) {
+        file = input.files[x];
+        if (jinja_size < file.size){
+        alert( "Sorry you have no more free space for" + file.name + " so you are not able to perform your transfer");
+        return false;}
+
+        else {
+		}
+        //alert( "File " + file.name + " is " + file.size + " bytes in size" + "avail space: " + jinja_size ); }
+		}
+    }
+}
+
+</script>
+</body>
+</html>

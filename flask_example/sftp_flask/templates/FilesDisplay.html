@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}'s Files</title>
+
+
+
+</head>
+<body>
+<h2>Your Path: </h2>
+<h3>{{dir_path}}</h3><br/>
+<h2>Files: </h2>
+<ol >
+{%- for item in file_list -%}
+    <a href="{{ url_for('download', dirc=dir_path , filename=item) }}"><li>{{ item }}</li></a>
+
+    {%- endfor -%}
+</ol>
+
+<h2>Directory: </h2>
+<ol >
+{%- for item in folder_list -%}
+
+    <a href="{{ url_for('temp_route', val1=dir_path, val2=item) }}"><li>{{ item }}</li></a>
+
+    {%- endfor -%}
+</ol>
+
+
+
+
+<h2><a href="{{url_for('login')}}">{{msg}}</a></h2>
+
+
+<form action="{{ url_for('create_dir',flag='True', dir_path=dir_path) }}" onsubmit="myFunction()" method="post">
+  <input type="submit" value="Create Directory" name="name_dir" id="name_dir">
+</form>
+
+<script>
+function myFunction() {
+    var x = prompt("Enter Your Directory Name: ");
+    document.getElementById("name_dir").value = x;
+}
+</script>
+<br /><br />
+
+
+        <form method="POST" enctype=multipart/form-data action="{{ url_for('upload', path_dir=dir_path) }}">
+            <label id="File: " ></label>&nbsp;&nbsp;&nbsp;
+            <input type="file" name="file" id="file" multiple><br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Upload Selected Files"><br /><br />
+
+        </form>
+
+
+<script type='text/javascript'>
+function showFileSize() {
+    var input, file;
+    var jinja_size = "{{ size }}";
+    jinja_size = parseInt(jinja_size);
+    // (Can't use `typeof FileReader === "function"` because apparently
+    // it comes back as "object" on some browsers. So just see if it's there
+    // at all.)
+    if (!window.FileReader) {
+        alert("The file API isn't supported on this browser yet.");
+        alert("service must be provided your files are validate at server side :- work remaining currently return is false after complete work it must be true");
+        return false;
+    }
+
+    input = document.getElementById('file');
+	var text1 = "";
+
+    //text1 += input.files[x].name;
+	//	}
+	//alert(text1);
+    if (!input) {
+        alert("Um, couldn't find the fileinput element.");
+        return false;
+    }
+    else if (!input.files) {
+        alert("This browser doesn't seem to support the `files` property of file inputs.");
+        return false;
+    }
+    else if (!input.files[0]) {
+        alert("Please select a file before clicking 'Load'");
+        return false;
+    }
+    else {
+		for (x in input.files) {
+        file = input.files[x];
+        if (jinja_size < file.size){
+        alert( "Sorry you have no more free space for" + file.name + " so you are not able to perform your transfer");
+        return false;}
+
+        else {
+		}
+        //alert( "File " + file.name + " is " + file.size + " bytes in size" + "avail space: " + jinja_size ); }
+		}
+    }
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

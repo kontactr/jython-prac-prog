@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head>
+
+</head>
+<body>
+
+<form method="post">
+ <table border="1">
+<tr>
+    <th>FileName:
+    </th>
+    <th>
+        Size:
+    </th>
+    <th>
+        Select Elements:
+    </th>
+
+</tr>
+{%- for item in folder_dir -%}
+        <tr>
+         <td ><a href="{{ url_for('view_data' , path=dir_path+'\\'+item) }}">{{ item }}</a></td>
+         <td style="background:red;color:white;text-align:center">Directory</td>
+            <td style="text-align:center"><input type="checkbox" name="sh_fi" value="{{item}}" /></td>
+        </tr>
+     {%- endfor -%}
+{%- for item in file_dir -%}
+        <tr>
+         <td>{{ item }}</td>
+            <td>{{file_dir[item]}}</td>
+            <td style="text-align:center"><input type="checkbox"  name="sh_fi" value="{{item}}" /></td>
+      </tr>
+     {%- endfor -%}
+     </table>
+
+  <br /><br />
+
+    <input type="submit" name="Delete_files" value="Delete Files"
+                formaction="{{url_for('delete_file' , path=dir_path )}}" formmethod="post"><br /><br />
+
+
+    <label>Abstract Compress</label>
+    <input type="radio" name="radio" value="Abstract Compress" checked />&nbsp;&nbsp;&nbsp;
+    <label>Deep Compress</label>
+    <input type="radio" name="radio" value="Deep Compress">&nbsp;&nbsp;&nbsp;
+
+    <input type="submit" name="Download_files" value="Download Files"
+           formaction="{{url_for('download_file' , path=dir_path ) }}" formmethod="post"><br /><br />
+
+
+</form>
+
+     <form method="POST" enctype=multipart/form-data action="{{url_for('upload_data' , path=dir_path)}}">
+
+            <input type="file" name="file" id="file" multiple>&nbsp;
+            <input type="submit" value="Upload Your Files"><br /><br />
+
+        </form>
+
+</form>
+
+     <form method="POST" enctype=multipart/form-data action="{{url_for('upload_folder' , path=dir_path)}}">
+
+            <input type="file" name="folder" id="folder" multiple>&nbsp;
+            <input type="submit" value="Upload Your Folders"><br /><br />
+
+        </form>
+
+
+
+
+<form onsubmit="myFunction()" action="{{url_for('create_dir' , path=dir_path)}}" method="post">
+    <input type="submit" name="name_dir" value="Create Directory"
+                 id="name_dir"
+         />
+
+</form>
+
+
+
+
+
+<h2><a href="{{url_for('login')}}">Go To Dashboard</a></h2>
+
+
+<script>
+    function myFunction() {
+    var x = prompt("Enter Your Directory Name: ");
+    document.getElementById("name_dir").value = x;
+}
+</script>
+</body>
+</html>

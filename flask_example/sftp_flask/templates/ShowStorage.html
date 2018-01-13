@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head>
+        <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Storage', 'Status'],
+          ['Storage',     {{total_size}}],
+          ['Remaining',      1024*1024*1024 - {{total_size}}]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script> -->
+</head>
+<body>
+    <!--<h2>Files: </h2> {{total_size}} -->
+<!--<div id="piechart_3d" style="width: 900px; height: 500px;"></div> -->
+<form method="post">
+ <table border="1">
+<tr>
+    <th>FileName:
+    </th>
+    <th>
+        Size:
+    </th>
+    <th>
+        Get Email / Public Share:
+    </th>
+</tr>
+{%- for item in storage_di -%}
+        <tr>
+         {% if '.' in item %}
+         <td>{{ item }}</td> <td>{{storage_di[item]}}</td><td style="text-align:center"><input type="checkbox" name="sh_fi" value="{{item}}" /></td>
+         {% else %}
+
+         <td ><a href="{{ url_for('show_storage' , path=dir_path+'\\'+item) }}">{{ item }}</a></td>
+         <td style="background:red;color:white;text-align:center">{{storage_di[item]}}</td>
+         <td style="background:red;color:white;text-align:center">Directory</td>
+         {% endif %}
+      </tr>
+    {%- endfor -%}
+     </table>
+     <!--div id="piechart_.3d" style="width: 900px; height: 500px;"></div-->
+  <br /><br />
+    <input type="submit" value="Delete Files" formaction="{{url_for('show_storage', path=dir_path)}}" formmethod="post"/><br /><br/>
+    <input type="submit" value="get in email"  formaction="{{url_for('send_email_data', path=dir_path+'\\')}}" formmethod="POST"/><br /><br />
+    <input type="submit" value="get public" formaction="{{url_for('get_pub_url')}}" formmethod="POST" ><br /><br />
+
+    <h2><a href="{{url_for('login')}}">Go To Dashboard</a></h2>
+</form>
+</body>
+</html>

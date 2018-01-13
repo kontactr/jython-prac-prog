@@ -1,0 +1,10 @@
+from java.io import ObjectInputStream as ois
+from obj_ser_jython import Employee
+
+file_read = open("file7.txt","r")
+os = ois(file_read)
+
+k = os.readObject()
+print (k)
+
+
