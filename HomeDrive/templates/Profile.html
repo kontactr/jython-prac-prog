@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+    <style>
+        table{
+
+            display:block;
+            border-left:5px solid green;
+
+
+        }
+        td{
+            padding-left:10px;
+            padding-right:20px;
+            padding-bottom:20px;
+        }
+
+      #map {
+        height: 100%
+
+
+      }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+<script>
+
+    function validate()
+    {
+    if (document.getElementById("password").value ==
+           document.getElementById("cpassword").value)
+           {
+
+                return true;
+           }
+      else
+      {
+        alert("Not match");
+        document.getElementById("password").value = "";
+        document.getElementById("cpassword").value = "";
+        document.getElementById("password").placeholder = "New password";
+        document.getElementById("cpassword").placeholder = "Confirm password";
+        return false;
+      }
+     }
+
+</script>
+
+
+</head>
+<body>
+<h2>Profile Details</h2>
+<form onsubmit="return validate();">
+<table>
+    
+
+    <tr>
+        <td>Name</td>
+        <td><input type="text" placeholder="{{ name }}" size="50" maxlength="50" autocomplete="true"
+        name="name"></td>
+    </tr>
+
+
+    <tr>
+        <td>Email</td>
+        <td><input type="text" placeholder="{{ email }}" size="50" maxlength="50" autocomplete="true"
+        name="email"></td>
+    </tr>
+
+        <tr>
+        <td>Password</td>
+        <td><input type="password" placeholder="New Password" size="50" maxlength="50" autocomplete="true"
+        name="password" id="password"></td>
+    </tr>
+
+        <tr>
+        <td>Confirm Password</td>
+        <td><input type="password" placeholder="Confirm Password" size="50" maxlength="50" autocomplete="true"
+        name="cpassword" id="cpassword"></td>
+    </tr>
+
+     <tr>
+
+         <td>
+     <input type="submit" value="Save" formaction="{{url_for('profile')}}" formmethod="post"><br/>
+        </td>
+
+     </tr>
+
+
+     <tr>
+
+         <td>
+     <input type="submit" value="Goto Dashboard" formaction="{{url_for('login')}}" formmethod="get"><br/>
+        </td>
+
+     </tr>
+        
+
+
+</table><br/><br/>
+
+</form>
+
+<form action="{{url_for('location_store')}}" method="post" onsubmit="initmap()">
+    <input type="submit" value="Save Location - " name="location" id="location">
+
+</form><br /><br />
+
+<form action="{{url_for('get_google_map')}}" method="post" >
+    <input type="hidden" name="platform" value="Desktop">
+    <input type="submit" value="Get All History " >
+
+
+
+
+
+</form><br /><br />
+
+
+ <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN_D2y6ZUCYnbNbKfUQD24FkOuiYok0fc&callback=initMap">
+    </script>
+    <script>
+
+      var map, infoWindow;
+      function initMap() {
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            console.log(pos);
+            var you = document.getElementById("location");
+            console.log(you);
+            you.value += pos.lat +" - "+ pos.lng;
+            console.log(you);
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+
+    </script>
+
+
+  </body>
+
+
+</html>

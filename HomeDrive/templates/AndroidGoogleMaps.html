@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Maps Data</title>
+</head>
+<body>
+    <table>
+        {%- for item in location_dir -%}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+            </tr>
+        {%- endfor -%}
+
+    </table>
+</body>
+</html>

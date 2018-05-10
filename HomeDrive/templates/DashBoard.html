@@ -14,6 +14,8 @@
 
     <input type="submit" value="View Data" formaction="{{ url_for('view_data', path=path) }}" formmethod="GET" /><br /><br /><br/>
     <input type="submit" value="Config" formaction="{{url_for('config_data')}}" formmethod="get" /><br/><br/><br/>
+    <input type="submit" value="profile" formaction="{{url_for('profile')}}" formmethod="get" /><br /><br/><br/>
+    <input type="submit" value="Google Drive" formaction="{{url_for('drive_auth')}}" formmethod="get"><br /><br/><br/>
      <input type="submit" value="LogOut" formaction="{{url_for('logout')}}" formmethod="post" /><br/>
 
 </form>

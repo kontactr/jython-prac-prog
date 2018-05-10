@@ -7,14 +7,18 @@ import os
 import shutil
 from os.path import basename
 import shutil
+from random import randint
+from math import gcd
 
 import time
 
-from config import logger
+#from config import logger
 
 from __init__ import app
 from flask import send_from_directory, send_file
 
+prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+prime_length = len(prime)
 
 def single_dir(path):
     file_dir = {}
@@ -115,3 +119,50 @@ def extract_folder(path,file_name):
     zip_ref.close()
 
 
+def gen_RSA_user():
+    p = randint(0, prime_length - 1)
+    q = randint(0, prime_length - 1)
+
+    while (p == 0 and q == 0):
+        q = randint(0, prime_length - 1)
+
+    p = prime[p]
+    q = prime[q]
+
+    #print(p, q)
+
+    n = p * q
+
+    fi_n = (p - 1) * (q - 1)
+
+    e = None
+    for j in range(2, fi_n):
+        if gcd(j, fi_n) == 1:
+            e = j
+            break
+
+    d = None
+    for j in range(1, fi_n):
+        if ((e * j) % fi_n) == (1 % fi_n):
+            d = j
+            break
+
+    return [e,d,n]
+
+
+def gen_RSA_encry_message(message , e , n):
+    enc_message=""
+    for j in str(message):
+        hex_message = (ord(j) ** e) % n
+        hex_message = hex(hex_message)[2:]
+        enc_message += hex_message + " "
+    return enc_message.strip(" ")
+
+
+def gen_RSA_decry_message(message,d,n):
+    dec_message=""
+    for j in message.split(" "):
+        int_message = int(j,16)
+        int_message = (int_message ** d) % n
+        dec_message += chr(int_message)
+    return dec_message

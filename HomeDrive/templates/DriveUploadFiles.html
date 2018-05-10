@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+</head>
+<body>
+<form method="get">
+ <table border="1">
+<tr>
+    <th>FileName:
+    </th>
+    <th>
+        Size:
+    </th>
+    <th>
+        Select Elements:
+    </th>
+
+</tr>
+{%- for item in folder_dir -%}
+        <tr>
+         <td ><a href="{{ url_for('upload_drive_files' , name=name , path=dir_path+''+item) }}">{{ item }}</a></td>
+         <td colspan="2" style="background:red;color:white;text-align:center">Directory</td>
+
+        </tr>
+     {%- endfor -%}
+{%- for item in file_dir -%}
+        <tr>
+         <td>{{ item }}</td>
+            <td>{{file_dir[item]}}</td>
+            <td style="text-align:center"><input type="checkbox"  name="sh_fi" value="{{item}}" /></td>
+      </tr>
+     {%- endfor -%}
+     </table>
+
+  <br /><br />
+
+    <input type="submit" value="Go To Procees"  formaction="{{url_for('upload_drive_files',name=name, path=dir_path)}}" formmethod="post"/><br /><br />
+</form>
+</body>
+</html>
